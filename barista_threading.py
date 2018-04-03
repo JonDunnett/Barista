@@ -25,7 +25,7 @@ def run(timedelta=0):
 		tm.sleep(timedelta)
 		print ("coffee on")
 		GPIO.output(4,True)
-		tm.sleep(60)
+		tm.sleep(6 * 60)
 		NUM_OF_TIMERS = NUM_OF_TIMERS - 1
 		print ("coffee off")
 		GPIO.output(4,False)
