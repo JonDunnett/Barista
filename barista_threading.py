@@ -120,4 +120,4 @@ def turn_off():
 	return statement('Coffee pot is off')
 
 if __name__ == '__main__':
-    app.run(host='155.47.45.211')
+    app.run(host='0.0.0.0')
