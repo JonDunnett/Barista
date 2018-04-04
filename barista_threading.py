@@ -79,19 +79,6 @@ lot of threads on the pi and slow down or even crash
 
 #logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
-'''
-@ask.intent('GPIOControlIntent', mapping={'status': 'status', 'pin': 'pin'})
-def gpio_control(status, pin):
-    try:
-        pinNum = int(pin)
-    except Exception as e:
-        return statement('Pin number not valid.')
-    GPIO.setup(pinNum, GPIO.OUT)
-    if status in ['on', 'high']:    GPIO.output(pinNum, GPIO.HIGH)
-    if status in ['off', 'low']:    GPIO.output(pinNum, GPIO.LOW)
-    return statement('Turning pin {} {}'.format(pin, status))
-'''
-''' convert={'on_time':'time'} '''
 
 @ask.intent('SetTimeIntent', mapping={'settime':'on_time','setdate':'on_date'})
 def set_time(on_time,on_date):
@@ -104,28 +91,7 @@ def set_time(on_time,on_date):
 	return statement("coffee will brew at {}".format(request.intent.slots.settime.value))
 	# ---------------------------------------------------
 	#pass
-'''
-@ask.intent('SetTimerIntent', mapping={'quantity':'quantity', 'units':'units'})
-def set_timer(quantity, units):
-	
-	Oquantity = quantity
-	if units == "seconds" or units=="second":
-		quantity = int(quantity)
 
-    	elif units == "minute" or units=="minutes":
-		quantity = int(quantity) * 60
-		#TIMER.start(secConv)
- 	elif units == "hours" or units=="hour":
-        	quantity = int(quantity) * 3600
-        	#if starting instead of duration:
-        	#TIMER.start(secConv)
-	else:
-		return statement("Please try again")
-	#TIMER = timer_thread(name="timer {}".format(NUM_OF_TIMERS),args=(quantity))
-	TIMER = threading.Thread(target=run,args=(quantity,))
-	TIMER.start()
-	return statement("coffee will brew in {} {}".format(Oquantity, units))
-'''
 @ask.intent('SetTimerIntent', mapping={'duration':'duration'})
 def set_timer(duration):
 	duration = request.intent.slots.duration.value
@@ -152,3 +118,6 @@ def turn_off():
 	GPIO.output(4,False)
 
 	return statement('Coffee pot is off')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
