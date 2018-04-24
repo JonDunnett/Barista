@@ -100,7 +100,7 @@ def set_time(on_time,on_date):
 	    on_time_f = tm.strptime(on_time, "%H:%M")
 	    on_time_f = datetime.fromtimestamp(tm.mktime(on_time_f))
 	
-	quantity = (on_time_f - time_now).total_seconds()
+	quantity = (time_now - on_time_f).total_seconds()
 	quantity = int(quantity)
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
