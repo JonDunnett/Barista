@@ -6,6 +6,10 @@ import RPi.GPIO as GPIO
 import logging
 import time as tm
 from datetime import datetime
+from OpenSSL import SSL
+context = SSL.Context(SSL.SSLv23_METHOD)
+context.use_privatekey_file('private-key.pem')
+context.use_certificate_file('certificate.pem')
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4,GPIO.OUT)
@@ -120,4 +124,4 @@ def turn_off():
 	return statement('Coffee pot is off')
 
 if __name__ == '__main__':
-    app.run(host='155.47.187.6',port=443,ssl_context='adhoc')
+    app.run(host='155.47.187.6',port=443,ssl_context=context)
