@@ -91,10 +91,12 @@ def set_time(on_time,on_date):
 	try: 
 	    on_date = request.intent.slots.setdate.value
 	    net_time = on_time + " " + on_date
+	    print(net_time)
 	    on_time = tm.strptime(net_time, "%H:%M %Y-%m-%d")
 	    on_time = datetime.fromtimestamp(mktime(on_time))
 	except:
 	    on_date = "";
+	    print(on_time)
 	    on_time = tm.strptime(on_time, "%H:%M")
 	    on_time = datetime.fromtimestamp(mktime(on_time))
 	
@@ -104,7 +106,7 @@ def set_time(on_time,on_date):
 	if on_date == "":
 	    return statement("coffee will brew at {}".format(request.intent.slots.settime.value))
 	else:
-		return statement("coffee will brew at {0} on {1}".format(request.intent.slots.settime.value,request.intent.slots.setdate.value))
+	    return statement("coffee will brew at {0} on {1}".format(request.intent.slots.settime.value,request.intent.slots.setdate.value))
 	
 	# ---------------------------------------------------
 
