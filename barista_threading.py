@@ -93,7 +93,7 @@ def set_time(on_time,on_date):
 	    net_time = on_time + " " + on_date
 	    print(net_time)
 	    on_time_f = tm.strptime(net_time, "%H:%M %Y-%m-%d")
-	    on_time_f = datetime.fromtimestamp(mktime(on_time_f))
+	    on_time_f = datetime.fromtimestamp(tm.mktime(on_time_f))
 	except:
 	    on_date = "";
 	    print(on_time)
