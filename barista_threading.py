@@ -86,7 +86,7 @@ def set_time(on_time,on_date):
 	#---NEEDS TESTING -----------------------------------
 	time_now = datetime.now()
 	#quantity = (on_time - time_now).total_seconds()
-	quantity = 6
+	quantity = 900000
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
 	return statement("coffee will brew at {}".format(request.intent.slots.settime.value))
