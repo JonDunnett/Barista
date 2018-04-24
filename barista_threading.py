@@ -93,12 +93,12 @@ def set_time(on_time,on_date):
 	    net_time = on_time + " " + on_date
 	    print(net_time)
 	    on_time_f = tm.strptime(net_time, "%H:%M %Y-%m-%d")
-	    on_time_f = datetime.fromtimestamp(mktime(on_time))
+	    on_time_f = datetime.fromtimestamp(mktime(on_time_f))
 	except:
 	    on_date = "";
 	    print(on_time)
 	    on_time_f = tm.strptime(on_time, "%H:%M")
-	    on_time_f = datetime.fromtimestamp(mktime(on_time))
+	    on_time_f = datetime.fromtimestamp(mktime(on_time_f))
 	
 	quantity = (on_time_f - time_now).total_seconds()
 	TIMER = threading.Thread(target=run,args=(quantity,))
