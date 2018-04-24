@@ -7,8 +7,6 @@ import logging
 import time as tm
 from datetime import datetime
 import ssl
-context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain('certificate.pem', 'private-key.pem')
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4,GPIO.OUT)
@@ -123,4 +121,6 @@ def turn_off():
 	return statement('Coffee pot is off')
 
 if __name__ == '__main__':
-    app.run(host='155.47.187.6',port=443)
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    context.load_cert_chain('certificate.pem', 'private-key.pem')
+    app.run(host='155.47.187.6',port=443, ssl_context=context)
