@@ -85,13 +85,26 @@ lot of threads on the pi and slow down or even crash
 def set_time(on_time,on_date):
 	#---NEEDS TESTING -----------------------------------
 	time_now = datetime.now()
-	#quantity = (on_time - time_now).total_seconds()
-	quantity = 900000
+	on_time = request.intent.slots.settime.value
+	if len(on_time) == 2:
+	    on_time = on_time + ":00"
+	try: 
+	    on_date = request.intent.slots.setdate.value
+	    net_time = on_time + " " + on_date
+	    on_time = tm.strptime(net_time, "%H:%M %Y-%m-%d")
+	except:
+	    on_date = "";
+	    on_time = tm.strptime(on_time, "%H:%M")
+	
+	quantity = (on_time - time_now).total_seconds()
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
-	return statement("coffee will brew at {}".format(request.intent.slots.settime.value))
+	if on_date == "":
+	    return statement("coffee will brew at {}".format(request.intent.slots.settime.value))
+	else:
+		return statement("coffee will brew at {0} on {1}".format(request.intent.slots.settime.value,request.intent.slots.setdate.value))
+	
 	# ---------------------------------------------------
-	#pass
 
 @ask.intent('SetTimerIntent', mapping={'duration':'duration'})
 def set_timer(duration):
