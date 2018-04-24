@@ -121,7 +121,7 @@ def turn_off():
 	return statement('Coffee pot is off')
 
 if __name__ == '__main__':
-    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-    context.load_cert_chain('certificate.pem', 'private-key.pem')
-    #
-    app.run(host='155.47.187.6',port=443, ssl_context=context)
+    #context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    #context.load_cert_chain('certificate.pem', 'private-key.pem')
+    #, ssl_context=context
+    app.run(host='155.47.187.6',port=443)
