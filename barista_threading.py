@@ -92,9 +92,11 @@ def set_time(on_time,on_date):
 	    on_date = request.intent.slots.setdate.value
 	    net_time = on_time + " " + on_date
 	    on_time = tm.strptime(net_time, "%H:%M %Y-%m-%d")
+	    on_time = datetime.fromtimestamp(mktime(on_time))
 	except:
 	    on_date = "";
 	    on_time = tm.strptime(on_time, "%H:%M")
+	    on_time = datetime.fromtimestamp(mktime(on_time))
 	
 	quantity = (on_time - time_now).total_seconds()
 	TIMER = threading.Thread(target=run,args=(quantity,))
