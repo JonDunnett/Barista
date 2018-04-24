@@ -98,7 +98,7 @@ def set_time(on_time,on_date):
 	    on_date = "";
 	    print(on_time)
 	    on_time_f = tm.strptime(on_time, "%H:%M")
-	    on_time_f = datetime.fromtimestamp(mktime(on_time_f))
+	    on_time_f = datetime.fromtimestamp(tm.mktime(on_time_f))
 	
 	quantity = (on_time_f - time_now).total_seconds()
 	TIMER = threading.Thread(target=run,args=(quantity,))
